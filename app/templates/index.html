@@ -10,10 +10,10 @@
         <hr class="my-4">
         
         <!-- Botões de ação rápida para testarmos o visual -->
-        <a href="{{ url_for('adicionar') }}" class="btn btn-success btn-lg shadow-sm m-2">
+        <a href="{{ url_for('adicionar_receita') }}" class="btn btn-success btn-lg shadow-sm m-2">
             + Nova Receita
         </a>
-        <a href="#" class="btn btn-danger btn-lg shadow-sm m-2">
+        <a href="{{ url_for('adicionar_despesa') }}" class="btn btn-danger btn-lg shadow-sm m-2">
             - Nova Despesa
         </a>
     </div>
@@ -30,6 +30,7 @@
                         <th>Descrição</th>
                         <th>Valor</th>
                         <th>Data</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,8 +38,21 @@
                     <tr>
                         <td>{{ t.id }}</td>
                         <td>{{ t.descricao }}</td>
-                        <td class="text-success fw-bold">{{ t.valor }}</td>
+                        <td class="fw-bold {% if t.categoria.tipo == 'Receita' %}text-success{% else %}text-danger{% endif %}"> R${{ t.valor }}</td>
                         <td>{{ t.data.strftime('%d/%m/%Y') }}</td>
+                        <td>
+                            <div class="d-flex gap-2">
+                                <!-- Botão Editar -->
+                                <a href="{{ url_for('editar', id_transacao=t.id) }}" class="btn btn-sm btn-outline-warning">
+                                    Editar
+                                </a>
+                                <a href="{{ url_for('deletar', id_transacao=t.id) }}" 
+                                class="btn btn-sm btn-outline-danger"
+                                onclick="return confirm('Tem certeza que deseja excluir esta transação?')">
+                                Excluir
+                                </a>
+                            </div>
+                        </td>
                     </tr>
                     {% else %}
                     <tr>

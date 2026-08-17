@@ -26,6 +26,24 @@ class Transacao(db.Model):
         SQLAlchemy = "INSERT INTO transacao (descricao, valor, data) VALUES (%s, %s, %s)"
         db.cursor.execute(SQLAlchemy, (descricao, valor, data))
         db.commit()
+
+    def despesa(descricao, valor, data):
+        db = SQLAlchemy()
+        SQLAlchemy = "INSERT INTO transacao (descricao, valor, data) VALUES (%s, %s, %s)"
+        db.cursor.execute(SQLAlchemy, (descricao, valor, data))
+        db.commit()
+
+    def editar(descricao, valor, data):
+        db = SQLAlchemy()
+        SQLAlchemy = "UPDATE transacao SET descricao = %s, valor = %s, data = %s"
+        db.cursor.execute(SQLAlchemy, (descricao, valor, data))
+        db.commit()
+
+    def deletar(id_receita):
+        db = SQLAlchemy()
+        SQLAlchemy = "DELETE FROM transacao WHERE id = %s"
+        db.cursor.execute(SQLAlchemy, (id_receita,))
+        db.commit()
         
 
 

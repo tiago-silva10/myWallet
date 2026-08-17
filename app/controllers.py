@@ -6,7 +6,19 @@ from app.models import db, Transacao, Categoria
 def index():
     #busca todas as transações
     transacoes = Transacao.query.all()
-    return render_template('index.html', transacoes=transacoes)
+
+    total_receitas = 0.0
+    total_despesas = 0.0
+
+    for t in transacoes:
+        if t.categoria.tipo == "Receita":
+            total_receitas += t.valor
+        elif t.categoria.tipo == "Despesa":
+            total_despesas += t.valor
+
+    saldo_atual = total_receitas - total_despesas
+
+    return render_template('index.html', transacoes=transacoes, total_receitas=total_receitas, total_despesas=total_despesas, saldo_atual=saldo_atual)
 
 @app.route('/receita', methods=['GET', 'POST'])
 def adicionar_receita():

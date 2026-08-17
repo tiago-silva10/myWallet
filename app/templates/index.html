@@ -8,6 +8,41 @@
         <p class="lead">Seu gerenciador financeiro pessoal, simples e direto.</p>
         
         <hr class="my-4">
+
+        <!-- DASHBOARD DE RESUMO -->
+        <div class="row mb-4 justify-content-center">
+            
+            <!-- Card de Receitas -->
+            <div class="col-md-3 m-2">
+                <div class="card text-white bg-success shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Receitas</h5>
+                        <h3 class="card-text">R$ {{ "%.2f"|format(total_receitas) }}</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card de Despesas -->
+            <div class="col-md-3 m-2">
+                <div class="card text-white bg-danger shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Despesas</h5>
+                        <h3 class="card-text">R$ {{ "%.2f"|format(total_despesas) }}</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card de Saldo Atual (Muda de cor dinamicamente!) -->
+            <div class="col-md-3 m-2">
+                <div class="card text-white shadow-sm {% if saldo_atual >= 0 %}bg-primary{% else %}bg-secondary{% endif %}">
+                    <div class="card-body">
+                        <h5 class="card-title">Saldo Atual</h5>
+                        <h3 class="card-text">R$ {{ "%.2f"|format(saldo_atual) }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- FIM DO DASHBOARD -->
         
         <!-- Botões de ação rápida para testarmos o visual -->
         <a href="{{ url_for('adicionar_receita') }}" class="btn btn-success btn-lg shadow-sm m-2">
